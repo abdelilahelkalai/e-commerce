@@ -1,0 +1,119 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: rgba(37, 99, 235, 0.08);
+
+  --color-text: #374151;
+  --color-text-secondary: #6b7280;
+  --color-text-heading: #111827;
+
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-tertiary: #f3f4f6;
+
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f6;
+
+  --color-shadow: rgba(0, 0, 0, 0.06);
+  --color-shadow-md: rgba(0, 0, 0, 0.08);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-sm: 0 1px 2px var(--color-shadow);
+  --shadow-md: 0 4px 12px var(--color-shadow-md);
+  --shadow-lg: 0 8px 24px var(--color-shadow-md);
+
+  --transition: 200ms ease;
+  --transition-slow: 350ms ease;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+  --container-max: 1200px;
+  --container-padding: 24px;
+
+  color-scheme: light dark;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #60a5fa;
+    --color-primary-hover: #93bbfd;
+    --color-primary-light: rgba(96, 165, 250, 0.12);
+
+    --color-text: #d1d5db;
+    --color-text-secondary: #9ca3af;
+    --color-text-heading: #f9fafb;
+
+    --color-bg: #0f1117;
+    --color-bg-secondary: #161822;
+    --color-bg-tertiary: #1f2133;
+
+    --color-border: #2d2f3e;
+    --color-border-light: #1f2133;
+
+    --color-shadow: rgba(0, 0, 0, 0.24);
+    --color-shadow-md: rgba(0, 0, 0, 0.36);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--color-bg-secondary);
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--color-text-heading);
+  line-height: 1.25;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
