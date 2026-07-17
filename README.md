@@ -4,7 +4,7 @@ A modern, minimal e-commerce starter built with React and Vite.
 
 ## Features
 
-- **Sign Up / Sign In** — client-side forms with validation, error states, and success screens
+- **Sign Up / Sign In** — forms powered by [react-hook-form](https://react-hook-form.com) with validation, error states, and success screens
 - **Reusable Field component** — DRY form inputs with label, error, and focus states
 - **Dark mode** — automatic via `prefers-color-scheme`
 - **Responsive** — mobile-first layout, works on all screen sizes
@@ -14,6 +14,7 @@ A modern, minimal e-commerce starter built with React and Vite.
 
 - [React 19](https://react.dev)
 - [Vite 8](https://vite.dev)
+- [react-hook-form](https://react-hook-form.com)
 - Plain CSS with CSS custom properties
 
 ## Getting Started
