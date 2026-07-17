@@ -129,7 +129,7 @@ export default function App() {
       {view === 'signup'
         ? <SignUp onSwitch={() => setView('signin')} />
         : <SignIn onSwitch={() => setView('signup')} />}
-      <footer className="footer">&copy; 2026 Ecommerce</footer>
+      <footer className="footer">&copy; 2026 Ecommerce &middot; Abdelilah El Kalai</footer>
     </div>
   )
 }
