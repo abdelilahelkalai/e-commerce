@@ -1,63 +1,22 @@
-.app {
+/* ── Layout ─────────────────────────────────────── */
+
+.main {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.page {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 48px var(--container-padding);
-  gap: 32px;
-}
-
-/* ── Card ──────────────────────────────────────── */
-
-.card {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: 48px 40px;
-  box-shadow: var(--shadow-md);
-  max-width: 480px;
-  width: 100%;
-  animation: slideUp 0.3s ease both;
-}
-
-.card__header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.card__title {
-  font-size: clamp(26px, 4vw, 32px);
-  letter-spacing: -0.03em;
-  margin-bottom: 8px;
-}
-
-.card__subtitle {
-  font-size: 15px;
   color: var(--color-text-secondary);
+  font-size: 24px;
 }
 
-.card__switch {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 14px;
-  color: var(--color-text-secondary);
-}
-
-.card__switch button {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-primary);
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-.card__switch button:hover {
-  text-decoration: underline;
-}
-
-/* ── Badge ─────────────────────────────────────── */
+/* ── Shared ────────────────────────────────────── */
 
 .badge {
   display: inline-flex;
@@ -67,8 +26,14 @@
   background: var(--color-primary-light);
   padding: 6px 14px;
   border-radius: 100px;
-  margin-bottom: 20px;
   letter-spacing: 0.02em;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(24px, 4vw, 32px);
+  letter-spacing: -0.03em;
+  margin-bottom: 40px;
 }
 
 /* ── Form ──────────────────────────────────────── */
@@ -135,6 +100,11 @@
   color: #ef4444;
 }
 
+.field__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
 /* ── Button ────────────────────────────────────── */
 
 .btn {
@@ -149,14 +119,35 @@
   border-radius: var(--radius-md);
   background: var(--color-primary);
   color: #fff;
+  text-decoration: none;
   transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
+}
+
+.btn--sm {
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
 }
 
 .btn--full {
   width: 100%;
   padding: 12px;
   margin-top: 4px;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-text-heading);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.btn--outline:hover {
+  background: var(--color-bg-tertiary);
+  box-shadow: none;
+  transform: translateY(-1px);
 }
 
 .btn:hover {
@@ -211,7 +202,6 @@
   font-size: 13px;
   color: var(--color-text-secondary);
   border-top: 1px solid var(--color-border-light);
-  margin-top: auto;
 }
 
 /* ── Animation ─────────────────────────────────── */
@@ -224,15 +214,6 @@
 /* ── Responsive ────────────────────────────────── */
 
 @media (max-width: 640px) {
-  .app {
-    padding: 32px 16px;
-    gap: 24px;
-  }
-
-  .card {
-    padding: 32px 20px;
-  }
-
   .form-row {
     grid-template-columns: 1fr;
   }
