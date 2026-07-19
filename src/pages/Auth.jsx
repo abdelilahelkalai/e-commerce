@@ -1,13 +1,13 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useAuth } from '../context/AuthContext'
 import './Auth.css'
 
 function Field({ label, error, register, ...inputProps }) {
   return (
     <div className="field">
-      <label className="field__label" htmlFor={inputProps.id}>
-        {label}
-      </label>
+      <label className="field__label" htmlFor={inputProps.id}>{label}</label>
       <input
         className={`field__input ${error ? 'field__input--error' : ''}`}
         {...register}
@@ -19,19 +19,13 @@ function Field({ label, error, register, ...inputProps }) {
 }
 
 function SignUp({ onSwitch }) {
-  const [done, setDone] = useState(false)
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm({
-    defaultValues: { firstName: '', lastName: '', email: '', password: '' },
-  })
+  const { register: registerUser } = useAuth()
+  const navigate = useNavigate()
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
-  if (done) {
-    return (
-      <div className="auth-card">
-        <div className="success-icon">✓</div>
-        <h2 className="success-title">Welcome, {getValues('firstName')}!</h2>
-        <p className="success-text">Your account is ready.</p>
-      </div>
-    )
+  function onSubmit(data) {
+    registerUser(data)
+    navigate('/')
   }
 
   return (
@@ -41,8 +35,7 @@ function SignUp({ onSwitch }) {
         <h1 className="auth-card__title">Create an account</h1>
         <p className="auth-card__subtitle">Free forever. No credit card needed.</p>
       </div>
-
-      <form className="form" onSubmit={handleSubmit(() => setDone(true))} noValidate>
+      <form className="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="form-row">
           <Field label="First name" id="firstName" autoComplete="given-name"
             register={register('firstName', { required: 'Required' })}
@@ -67,7 +60,6 @@ function SignUp({ onSwitch }) {
           error={errors.password} />
         <button className="btn btn--full" type="submit">Create account</button>
       </form>
-
       <p className="auth-card__switch">
         Already have an account? <button type="button" onClick={onSwitch}>Sign in</button>
       </p>
@@ -76,19 +68,15 @@ function SignUp({ onSwitch }) {
 }
 
 function SignIn({ onSwitch }) {
-  const [done, setDone] = useState(false)
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm({
-    defaultValues: { email: '', password: '' },
-  })
+  const { signIn } = useAuth()
+  const navigate = useNavigate()
+  const [error, setError] = useState('')
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
-  if (done) {
-    return (
-      <div className="auth-card">
-        <div className="success-icon">✓</div>
-        <h2 className="success-title">Welcome back!</h2>
-        <p className="success-text">You are signed in as {getValues('email')}.</p>
-      </div>
-    )
+  function onSubmit(data) {
+    const result = signIn(data.email, data.password)
+    if (result.error) return setError(result.error)
+    navigate('/')
   }
 
   return (
@@ -98,8 +86,7 @@ function SignIn({ onSwitch }) {
         <h1 className="auth-card__title">Welcome back</h1>
         <p className="auth-card__subtitle">Sign in to your account.</p>
       </div>
-
-      <form className="form" onSubmit={handleSubmit(() => setDone(true))} noValidate>
+      <form className="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Field label="Email" id="signin-email" type="email" autoComplete="email"
           placeholder="you@example.com"
           register={register('email', {
@@ -111,9 +98,9 @@ function SignIn({ onSwitch }) {
           placeholder="Enter your password"
           register={register('password', { required: 'Required' })}
           error={errors.password} />
+        {error && <span className="field__error">{error}</span>}
         <button className="btn btn--full" type="submit">Sign in</button>
       </form>
-
       <p className="auth-card__switch">
         Don't have an account? <button type="button" onClick={onSwitch}>Sign up</button>
       </p>

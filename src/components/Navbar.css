@@ -56,6 +56,12 @@
   background: var(--color-bg-tertiary);
 }
 
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 640px) {
   .navbar {
     gap: 16px;
