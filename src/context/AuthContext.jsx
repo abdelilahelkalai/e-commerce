@@ -1,42 +1,22 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 const AuthContext = createContext(null)
-
-const USERS_KEY = 'users'
-const USER_KEY = 'user'
-
-function getUsers() {
-  return JSON.parse(localStorage.getItem(USERS_KEY) || '[]')
-}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    const saved = localStorage.getItem(USER_KEY)
-    if (saved) setUser(JSON.parse(saved))
-  }, [])
-
-  function register({ firstName, lastName, email, password }) {
-    const users = getUsers()
-    users.push({ firstName, lastName, email, password })
-    localStorage.setItem(USERS_KEY, JSON.stringify(users))
-    setUser({ firstName, lastName, email })
-    localStorage.setItem(USER_KEY, JSON.stringify({ firstName, lastName, email }))
+  function register(userData) {
+    setUser(userData)
   }
 
   function signIn(email, password) {
-    const found = getUsers().find((u) => u.email === email)
-    if (!found) return { error: 'No account found with this email' }
-    if (found.password !== password) return { error: 'Incorrect password' }
-    const { password: _, ...userData } = found
-    setUser(userData)
-    localStorage.setItem(USER_KEY, JSON.stringify(userData))
+    // TODO: replace with API call to MongoDB
+    if (!email || !password) return { error: 'Invalid credentials' }
+    setUser({ firstName: email.split('@')[0], email })
     return { error: null }
   }
 
   function logout() {
-    localStorage.removeItem(USER_KEY)
     setUser(null)
   }
 
