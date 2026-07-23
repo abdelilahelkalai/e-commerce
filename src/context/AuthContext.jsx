@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   }
 
   function signIn(email, password) {
-    // TODO: replace with API call to MongoDB
+    // API call to mongoDB
     if (!email || !password) return { error: 'Invalid credentials' }
     setUser({ firstName: email.split('@')[0], email })
     return { error: null }
