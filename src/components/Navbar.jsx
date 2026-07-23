@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './Navbar.css'
@@ -15,6 +16,7 @@ function Logo() {
 
 export default function Navbar() {
   const { user, logout } = useAuth()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <nav className="navbar">
@@ -22,20 +24,33 @@ export default function Navbar() {
         <Logo />
         MarketWave
       </Link>
-      <ul className="navbar__links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/shop">Shop</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+
+      <button
+        className={`navbar__toggle ${menuOpen ? 'navbar__toggle--open' : ''}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
+        <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+        <li><Link to="/shop" onClick={() => setMenuOpen(false)}>Shop</Link></li>
+        <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
+        <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+        {user ? (
+          <>
+            <li><Link to="/profile" onClick={() => setMenuOpen(false)}>{user.firstName || user.email}</Link></li>
+            <li>
+              <button className="navbar__logout" onClick={() => { logout(); setMenuOpen(false); }}>Logout</button>
+            </li>
+          </>
+        ) : (
+          <li><Link to="/auth" onClick={() => setMenuOpen(false)}>Sign In</Link></li>
+        )}
       </ul>
-      {user ? (
-        <div className="navbar__user">
-          <Link className="btn btn--sm btn--outline" to="/profile">{user.firstName || user.email}</Link>
-          <button className="btn btn--sm" onClick={logout}>Logout</button>
-        </div>
-      ) : (
-        <Link className="btn btn--sm" to="/auth">Sign In</Link>
-      )}
     </nav>
   )
 }
