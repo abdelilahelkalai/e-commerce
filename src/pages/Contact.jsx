@@ -1,35 +1,7 @@
-import './Contact.css'
-
 export default function Contact() {
   return (
-    <div className="contact">
-      <h1>Contact Us</h1>
-      <p>Have a question or need help? Reach out to us.</p>
-
-      <div className="contact__grid">
-        <div className="contact__info">
-          <h2>Get in Touch</h2>
-          <ul>
-            <li><strong>Email</strong> support@marketwave.com</li>
-            <li><strong>Phone</strong> +1 (555) 123-4567</li>
-            <li><strong>Address</strong> 123 Tech Street, San Francisco, CA</li>
-          </ul>
-          <h2>Hours</h2>
-          <ul>
-            <li>Mon - Fri: 9am - 6pm</li>
-            <li>Sat: 10am - 4pm</li>
-            <li>Sun: Closed</li>
-          </ul>
-        </div>
-
-        <form className="contact__form" onSubmit={(e) => e.preventDefault()}>
-          <h2>Send a Message</h2>
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Your Message" rows="5" required />
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
+    <div className="page">
+      <h1>Contact</h1>
     </div>
   )
 }
