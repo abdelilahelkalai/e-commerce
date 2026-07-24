@@ -10,12 +10,24 @@ export default function About() {
         tablets, and more — all at competitive prices.
       </p>
       <h2>What We Offer</h2>
-      <ul>
-        <li>Desktops & All-in-One PCs</li>
-        <li>Laptops & Ultrabooks</li>
-        <li>iPads & Tablets</li>
-        <li>Accessories & Peripherals</li>
-      </ul>
+      <div className="about__products">
+        <div className="about__product">
+          <img src="/images/desktop.svg" alt="Desktops" />
+          <span>Desktops & PCs</span>
+        </div>
+        <div className="about__product">
+          <img src="/images/laptop.svg" alt="Laptops" />
+          <span>Laptops</span>
+        </div>
+        <div className="about__product">
+          <img src="/images/tablet.svg" alt="Tablets" />
+          <span>iPads & Tablets</span>
+        </div>
+        <div className="about__product">
+          <img src="/images/accessories.svg" alt="Accessories" />
+          <span>Accessories</span>
+        </div>
+      </div>
       <p>
         Our mission is to make technology accessible to everyone.
         Whether you're a student, professional, or tech enthusiast,
