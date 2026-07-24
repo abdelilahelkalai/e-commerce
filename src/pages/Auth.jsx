@@ -21,11 +21,18 @@ function Field({ label, error, register, ...inputProps }) {
 function SignUp({ onSwitch }) {
   const { register: registerUser } = useAuth()
   const navigate = useNavigate()
+  const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  function onSubmit(data) {
-    registerUser(data)
-    navigate('/')
+  async function onSubmit(data) {
+    setError('')
+    try {
+      const result = await registerUser(data)
+      if (result.error) return setError(result.error)
+      navigate('/')
+    } catch {
+      setError('Could not connect to server')
+    }
   }
 
   return (
@@ -58,6 +65,7 @@ function SignUp({ onSwitch }) {
             minLength: { value: 8, message: 'Min. 8 characters' },
           })}
           error={errors.password} />
+        {error && <span className="field__error">{error}</span>}
         <button className="btn btn--full" type="submit">Create account</button>
       </form>
       <p className="auth-card__switch">
@@ -73,10 +81,15 @@ function SignIn({ onSwitch }) {
   const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  function onSubmit(data) {
-    const result = signIn(data.email, data.password)
-    if (result.error) return setError(result.error)
-    navigate('/')
+  async function onSubmit(data) {
+    setError('')
+    try {
+      const result = await signIn(data.email, data.password)
+      if (result.error) return setError(result.error)
+      navigate('/')
+    } catch {
+      setError('Could not connect to server')
+    }
   }
 
   return (
